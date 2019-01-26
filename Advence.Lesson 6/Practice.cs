@@ -16,7 +16,10 @@ namespace Advence.Lesson_6
         /// Дата создания
         /// </summary>
         public static void AL6_P1_7_DirInfo()
-        {           
+        {
+            var dirInfo = new DirectoryInfo("c://Program Files");
+            Console.WriteLine(dirInfo.Name);
+            Console.WriteLine(dirInfo.CreationTime);
         }
 
 
@@ -28,6 +31,13 @@ namespace Advence.Lesson_6
         /// </summary>
         public static void AL6_P2_7_FileInfo()
         {
+            var dirInfo = new DirectoryInfo("C://Users/User/Desktop/A-4(6)-Files, Streams, Serialziation/Advence.Lesson 6");
+            foreach (var file in dirInfo.GetFiles("*.cs"))
+            {
+                Console.WriteLine(file.Name);
+                Console.WriteLine(file.CreationTime);
+                Console.WriteLine(file.Length);
+            }
         }
 
         /// <summary>
@@ -35,6 +45,7 @@ namespace Advence.Lesson_6
         /// </summary>
         public static void AL6_P3_7_CreateDir()
         {
+            Directory.CreateDirectory("c://Program Files Copy");
         }
 
 
@@ -43,15 +54,45 @@ namespace Advence.Lesson_6
         /// </summary>
         public static void AL6_P4_7_CopyFile()
         {
-
+            var dirInfo = new DirectoryInfo("C://Users/User/Desktop/A-4(6)-Files, Streams, Serialziation/Advence.Lesson 6");
+            var files = dirInfo.GetFiles("*.cs");
+            Directory.CreateDirectory("C://Users/User/Desktop/A-4(6)-Files, Streams, Serialziation/Advence.Lesson 6 Copy");
+            files[0].CopyTo("C://Users/User/Desktop/A-4(6)-Files, Streams, Serialziation/Advence.Lesson 6 Copy/" + files[0].Name);
         }
 
         /// <summary>
         /// AL6-P5/7-FileChat. Написать программу имитирующую чат. 
         /// Пускай в ней будут по очереди запрашивается реплики для User 1 и User 2 (используйте цикл из 5-10 итераций).  Сохраняйте данные реплики с ником пользователя и датой в файл на диске.
         /// </summary>
-        private static void AL6_P5_7_FileChat()
-        {           
+        public static void AL6_P5_7_FileChat()
+        {
+            var adapter = new StreamWriter("D:/History.txt", true );
+            string str;
+            for (int i = 0; i < 5; i++)
+            {
+                if (i % 2 == 0)
+                {
+                    Console.WriteLine("User 1");
+                }
+                else
+                {
+                    Console.WriteLine("User 2");
+                }
+
+                str = Console.ReadLine();
+                adapter.WriteLine(DateTime.Now.ToString());
+                if (i % 2 == 0)
+                {
+                    adapter.WriteLine("User 1: ");
+                }
+                else
+                {
+                    adapter.WriteLine("User 2: ");
+                }
+                adapter.WriteLine(str);
+
+            }
+            adapter.Close();
         }
 
         /// <summary>
@@ -68,6 +109,7 @@ namespace Advence.Lesson_6
                 Lyrics = "Lyrics 1"
             };
            
+
         }
 
         /// <summary>

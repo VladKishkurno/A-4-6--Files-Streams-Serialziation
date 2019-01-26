@@ -28,11 +28,11 @@ namespace Advence.Lesson_6
             };
 
             XmlSerializer xmlSerializer = new XmlSerializer(arr.GetType());
-
             using (StringWriter textWriter = new StringWriter())
             {
                 xmlSerializer.Serialize(textWriter, arr);
                 var result = textWriter.ToString();
+               // xmlSerializer.Serialize(;
             }
         }
 
